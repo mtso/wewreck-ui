@@ -1,0 +1,26 @@
+{
+	"name": "wewreck",
+	"version": "1.0.0",
+	"description": "for wehack",
+	"private": true,
+	"repository": "git@github.com:mtso/wewreck-ui.git",
+	"author": "Matt, Kun Zhou <kunz@wepay.com>",
+	"scripts": {
+		"build": "webpack",
+		"start": "open dist/index.html",
+		"serve":"yarn build && yarn start",
+		"s":"yarn build && yarn start"
+	},
+	"devDependencies": {
+		"babel-core": "^6.26.3",
+		"babel-loader": "^7.1.4",
+		"babel-plugin-transform-react-jsx": "^6.24.1",
+		"prettier": "^1.13.7",
+		"webpack": "^4.13.0",
+		"webpack-cli": "^3.0.8"
+	},
+	"dependencies": {
+		"react": "^16.4.1",
+		"react-dom": "^16.4.1"
+	}
+}
