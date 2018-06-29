@@ -10,14 +10,28 @@ export default class Bubble extends PureComponent {
     this.state = {
       opacity: 0.8
     }
+
+    this.timers = []
+  }
+
+  componentWillUnmount() {
+    this.timers.forEach((handle) => {
+      clearTimeout(handle)
+    })
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timers && this.timers.push(setTimeout(() => {
       this.setState({
         opacity: 0.1,
       })
-    }, 2000)
+    }, 2 * 1000))
+
+    this.timers && this.timers.push(setTimeout(() => {
+      this.setState({
+        opacity: 0,
+      })
+    }, 60 * 1000))
   }
 
   render() {
