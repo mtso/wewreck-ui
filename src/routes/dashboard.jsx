@@ -6,7 +6,6 @@ import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
-import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views
 import DashboardPage from "views/Dashboard/Dashboard.jsx";
 import UserProfile from "views/UserProfile/UserProfile.jsx";

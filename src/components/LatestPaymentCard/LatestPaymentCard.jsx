@@ -1,6 +1,6 @@
+
 import React, { PureComponent } from "react";
 import Update from "@material-ui/icons/Update";
-import Accessibility from "@material-ui/icons/Accessibility";
 import Schedule from "@material-ui/icons/Schedule";
 
 // core components
@@ -16,9 +16,9 @@ import config from '../../config.json'
 class LatestPaymentCard extends PureComponent {
   render() {
     const { latestPayment, classes } = this.props
-    const amount = latestPayment.payment && ('$' + latestPayment.payment.amount) || 'No new payment'
-    const timestamp = latestPayment.payment
-      && new Date(latestPayment.payment.create_time * 1000)
+    const amount = (latestPayment.payment && ('$' + latestPayment.payment.amount)) || 'No new payment'
+    const timestamp = (latestPayment.payment
+      && new Date(latestPayment.payment.create_time * 1000))
       || null
 
     return (
