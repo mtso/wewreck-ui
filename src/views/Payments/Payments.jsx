@@ -48,15 +48,34 @@ function TableList(props) {
   const { classes } = props;
   return (
     <Grid container>
+      {/* Live Payments */}
+      <GridItem xs={12} sm={12} md={12}>
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>
+              Live Payments
+            </h4>
+            <p className={classes.cardCategoryWhite}>
+              View payments as they come in.
+            </p>
+          </CardHeader>
+          <CardBody>
+            <PaymentsGraph
+              account_id={config.account_id}
+            />
+          </CardBody>
+        </Card>
+      </GridItem>
       
+      {/* Payments by Location */}
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader plain color="primary">
             <h4 className={classes.cardTitleWhite}>
-              Table on Plain Background
+              Live Payments Map
             </h4>
             <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
+              View where payments are coming from.
             </p>
           </CardHeader>
           <CardBody>
@@ -67,21 +86,6 @@ function TableList(props) {
         </Card>
       </GridItem>
 
-      <GridItem xs={12} sm={12} md={12}>
-        <Card>
-          <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Simple Table</h4>
-            <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p>
-          </CardHeader>
-          <CardBody>
-            <PaymentsGraph
-              account_id={config.account_id}
-            />
-          </CardBody>
-        </Card>
-      </GridItem>
     </Grid>
   );
 }

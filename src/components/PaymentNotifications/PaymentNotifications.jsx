@@ -24,6 +24,8 @@ import subscribeToPaymentsList from '../../we-components/data/subscribeToPayment
 import config from '../../config.json'
 import moment from 'moment'
 
+import { withRouter } from 'react-router-dom'
+
 class PaymentNotifications extends PureComponent {
   constructor(props) {
     super(props)
@@ -89,7 +91,9 @@ class PaymentNotifications extends PureComponent {
                     payments.slice(0, 5).map((payment) => (
                       <MenuItem
                         key={payment.payment.id}
-                        onClick={this.handleClose}
+                        onClick={(e) => {
+                          this.props.history.push('/payments', {})
+                        }}
                         className={classes.dropdownItem}
                       >
                         { moment(payment.payment.create_time * 1000).format('LT') }: New Payment Created!
@@ -106,4 +110,6 @@ class PaymentNotifications extends PureComponent {
   }
 }
 
-export default subscribeToPaymentsList(config.account_id)(PaymentNotifications)
+export default withRouter(
+  subscribeToPaymentsList(config.account_id)(PaymentNotifications)
+)
