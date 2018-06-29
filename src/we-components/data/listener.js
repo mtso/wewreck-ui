@@ -1,6 +1,6 @@
 import EventEmitter from 'eventemitter3'
 import WebSocket from 'simple-websocket'
-
+import paymentsCache from './paymentsCache'
 export default class Listener extends EventEmitter {
   constructor(accountId) {
     super()
@@ -24,6 +24,7 @@ export default class Listener extends EventEmitter {
       try {
         const payload = JSON.parse(data.toString())
         this.emit('new_payment', payload)
+        paymentsCache.save(payload)
 
       } catch(err) {
         // skip registered message for now

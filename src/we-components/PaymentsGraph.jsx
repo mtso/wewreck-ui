@@ -3,6 +3,7 @@ import ReactTable from 'react-table'
 import "react-table/react-table.css";
 
 import Listener from './data/listener'
+import paymentsCache from './data/paymentsCache'
 
 // const makeData = (len = 100) => {
 //   return Array(len).fill(0).map((() => {
@@ -20,19 +21,25 @@ const mapPayloadToPayment = (data) => ({
 export default class PaymentsGraph extends PureComponent {
   constructor(props) {
     super(props)
+    const payments = paymentsCache.getAll()
     this.state = {
-      data: []
+      data: payments.map(mapPayloadToPayment),
     }
   }
   componentWillUnmount() {
     this.listener && this.listener.close()
   }
   componentDidMount() {
-    const listener = this.listener = new Listener(this.props.account_id) //'55c45c04-a7ef-4123-8b30-0f11c237c59b')//fd46924a-b1cc-4406-a715-4c4828ebba87')
+    const listener = this.listener = new Listener(this.props.account_id)
 
     listener.on('new_payment', (data) => {
-      console.log(data)
-      console.log(this.state, this.state.data, mapPayloadToPayment(data))
+      data = mapPayloadToPayment(data)
+
+      // Don't add new data if it's already in the list
+      if (this.state.data.any((payment) => payment.id === data.id)) {
+        return
+      }
+
       this.setState({
         data: this.state.data.concat([ mapPayloadToPayment(data) ])
       })

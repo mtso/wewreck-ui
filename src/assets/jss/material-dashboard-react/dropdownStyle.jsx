@@ -86,6 +86,32 @@ const dropdownStyle = theme => ({
             ...primaryBoxShadow,
         }
     },
+
+    // custom
+    dropdownLink: {
+        ...defaultFont,
+        fontSize: '13px',
+        padding: '10px 20px',
+        margin: '0 5px',
+        borderRadius: '2px',
+        WebkitTransition: 'all 150ms linear',
+        MozTransition: 'all 150ms linear',
+        OTransition: 'all 150ms linear',
+        MsTransition: 'all 150ms linear',
+        transition: 'all 150ms linear',
+        display: 'block',
+        clear: 'both',
+        fontWeight: '600',
+        lineHeight: '1.4',
+        color: '#333',
+        whiteSpace: 'nowrap',
+        height: "unset",
+        '&:hover': {
+            backgroundColor: primaryColor,
+            color: '#FFFFFF',
+            ...primaryBoxShadow,
+        }
+    },
 });
 
 export default dropdownStyle;

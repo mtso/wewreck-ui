@@ -95,6 +95,20 @@ class PaymentNotifications extends PureComponent {
                       </MenuItem>
                     ))
                   }
+                  {
+                    payments.length > 5 && (
+                      <MenuItem
+                        className={classes.dropdownLink}
+                        onClick={(e) => {
+                          this.setState({
+                            open: false,
+                          }, () => this.props.history.push('/payments', {}))
+                        }}
+                      >
+                        { payments.length - 5 } more payments >
+                      </MenuItem>
+                    )
+                  }
                 </MenuList>
               </Paper>
             </Grow>

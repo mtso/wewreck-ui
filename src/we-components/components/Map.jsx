@@ -1,4 +1,3 @@
-
 import React, { Component } from "react"
 import {
   ComposableMap,
@@ -24,7 +23,7 @@ const cityScale = scaleLinear()
   .range([1,25])
 
 const mapPayloadToCity = (payload) => ({
-  id: payload.id,
+  id: payload.payment.id,
   name: 'some name',
   coordinates: [
     +payload.geo.lng,
