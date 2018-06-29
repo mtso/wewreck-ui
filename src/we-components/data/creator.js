@@ -1,4 +1,5 @@
 import loremIpsum from 'lorem-ipsum'
+
 export default function createPayment() {
   return {
     amount: (Math.random() * 2000).toFixed(2),

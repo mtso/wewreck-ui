@@ -4,6 +4,8 @@ import "react-table/react-table.css";
 
 import createPayment from './data/creator'
 
+import Listener from './data/listener'
+
 const makeData = (len = 100) => {
   return Array(len).fill(0).map((() => {
     return createPayment()
@@ -17,16 +19,24 @@ export default class PaymentsGraph extends PureComponent {
       data: makeData()
     }
   }
+  componentWillUnmount() {
+    this.listener && this.listener.close()
+  }
   componentDidMount() {
-    setInterval(() => {
-      const payment = createPayment()
-      console.log(payment)
-      this.setState({
-        data: this.state.data.concat([
-          payment
-        ])
-      })
-    }, 2000)
+    // const l = this.listener = new Listener('newmerchantid')
+    // l.on('new_payment', (data) => {
+    //   console.log('from listener:', data)
+    // })
+
+    // setInterval(() => {
+    //   const payment = createPayment()
+    //   console.log(payment)
+    //   this.setState({
+    //     data: this.state.data.concat([
+    //       payment
+    //     ])
+    //   })
+    // }, 2000)
   }
   render() {
     const { data } = this.state
