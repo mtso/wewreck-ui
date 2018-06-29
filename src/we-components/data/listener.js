@@ -2,30 +2,40 @@ import EventEmitter from 'eventemitter3'
 import WebSocket from 'simple-websocket'
 
 export default class Listener extends EventEmitter {
-  constructor(merchantId) {
+  constructor(accountId) {
     super()
+    console.log('making websocket connection')
 
-    const socket = this.socket = new WebSocket('wss://agile-chamber-50593.herokuapp.com/pingpong')
+    const socket = this.socket = new WebSocket('wss://agile-chamber-50593.herokuapp.com/payments')
 
     socket.on('connect', (data) => {
+      console.log('websocket connected', data)
 
-      socket.send({
+      socket.send(JSON.stringify({
         type: 'register',
-        merchantId: merchantId,
-      })
+        account_id: accountId,
+      }))
       
-      this.sender = setInterval(() => socket.send('ping'), 1000)
     })
+
     socket.on('data', (data) => {
-      this.emit('new_payment', data.toString())
+      console.log('Got Message:', data.toString())
+
+      try {
+        const payload = JSON.parse(data.toString())
+        this.emit('new_payment', payload)
+
+      } catch(err) {
+        console.warn(err)
+      }
     })
+    
     socket.on('error', function(err) {
       console.warn('socket error', err)
     })
   }
 
   close() {
-    clearInterval(this.sender)
     this.socket.destroy()
   }
 }

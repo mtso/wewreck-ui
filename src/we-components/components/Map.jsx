@@ -9,7 +9,7 @@ import {
   Marker,
 } from "react-simple-maps"
 import { scaleLinear } from "d3-scale"
-import request from "superagent"
+// import request from "superagent"
 
 const wrapperStyles = {
   width: "100%",
