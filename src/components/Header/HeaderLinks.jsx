@@ -20,6 +20,8 @@ import Button from "components/CustomButtons/Button.jsx";
 
 import headerLinksStyle from "assets/jss/material-dashboard-react/components/headerLinksStyle";
 
+import PaymentNotifications from '../PaymentNotifications/PaymentNotifications'
+
 class HeaderLinks extends React.Component {
   state = {
     open: false
@@ -64,7 +66,13 @@ class HeaderLinks extends React.Component {
             <p className={classes.linkText}>Dashboard</p>
           </Hidden>
         </Button>
-        <Manager className={classes.manager}>
+
+        {/* NOTIFICATIONS */}
+        <PaymentNotifications
+          classes={classes}
+          window={window}
+        />
+        {/* <Manager className={classes.manager}>
           <Target>
             <Button
               color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -137,7 +145,7 @@ class HeaderLinks extends React.Component {
               </Grow>
             </ClickAwayListener>
           </Popper>
-        </Manager>
+        </Manager> */}
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
           justIcon={window.innerWidth > 959}

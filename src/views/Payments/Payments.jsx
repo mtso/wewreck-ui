@@ -50,7 +50,7 @@ function TableList(props) {
     <Grid container>
       
       <GridItem xs={12} sm={12} md={12}>
-        <Card plain>
+        <Card>
           <CardHeader plain color="primary">
             <h4 className={classes.cardTitleWhite}>
               Table on Plain Background

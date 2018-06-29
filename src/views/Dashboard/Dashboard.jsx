@@ -19,6 +19,7 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
+// import Schedule from "@material-ui/icons/Schedule";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
 import Table from "components/Table/Table.jsx";
@@ -40,6 +41,8 @@ import {
 } from "variables/charts";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
+
+import LatestPaymentCard from '../../components/LatestPaymentCard/LatestPaymentCard'
 
 class Dashboard extends React.Component {
   state = {
@@ -114,13 +117,15 @@ class Dashboard extends React.Component {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={3}>
+
+          {/* LATEST PAYMENT */}
+          {/* <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="info" stats icon>
                 <CardIcon color="info">
                   <Accessibility />
                 </CardIcon>
-                <p className={classes.cardCategory}>Followers</p>
+                <p className={classes.cardCategory}>Latest Payment</p>
                 <h3 className={classes.cardTitle}>+245</h3>
               </CardHeader>
               <CardFooter stats>
@@ -130,7 +135,10 @@ class Dashboard extends React.Component {
                 </div>
               </CardFooter>
             </Card>
-          </GridItem>
+          </GridItem> */}
+          <LatestPaymentCard
+            classes={classes}
+          />
         </Grid>
         <Grid container>
           <GridItem xs={12} sm={12} md={4}>
