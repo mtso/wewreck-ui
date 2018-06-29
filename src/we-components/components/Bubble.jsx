@@ -8,21 +8,34 @@ export default class Bubble extends PureComponent {
     super()
 
     this.state = {
+      opacity: 0.8
     }
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        opacity: 0.1,
+      })
+    }, 2000)
   }
 
   render() {
     const { city, r, ...rest } = this.props
+    const { opacity } = this.state
+
     return (
       <Motion
         defaultStyle={{
           r: 0,
+          opacity: 0.8,
         }}
         style={{
-          r: spring(r, { stiffness: 210, damping: 20 })
+          r: spring(r, { stiffness: 210, damping: 20 }),
+          opacity: spring(opacity, { stiffness: 210, damping: 20 }),
         }}
       >
-        {({ r }) => (
+        {({ r, opacity }) => (
           <Marker
             marker={this.props.city}
             {...rest}
@@ -31,9 +44,9 @@ export default class Bubble extends PureComponent {
               cx={0}
               cy={0}
               r={r}
-              fill="rgba(255,87,34,0.8)"
+              fill={`rgba(255,87,34,${opacity})`}
               stroke="#607D8B"
-              strokeWidth="2"
+              strokeWidth="0"
             />
           </Marker>
         )}
