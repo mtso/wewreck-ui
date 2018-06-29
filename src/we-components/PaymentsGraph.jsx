@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react'
 import ReactTable from 'react-table'
 import "react-table/react-table.css";
 
-import createPayment from './data/creator'
-
 import Listener from './data/listener'
 
 // const makeData = (len = 100) => {
@@ -30,7 +28,7 @@ export default class PaymentsGraph extends PureComponent {
     this.listener && this.listener.close()
   }
   componentDidMount() {
-    const listener = this.listener = new Listener('55c45c04-a7ef-4123-8b30-0f11c237c59b')//fd46924a-b1cc-4406-a715-4c4828ebba87')
+    const listener = this.listener = new Listener(this.props.account_id) //'55c45c04-a7ef-4123-8b30-0f11c237c59b')//fd46924a-b1cc-4406-a715-4c4828ebba87')
 
     listener.on('new_payment', (data) => {
       console.log(data)

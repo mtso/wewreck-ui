@@ -9,7 +9,7 @@ export default class Listener extends EventEmitter {
     const socket = this.socket = new WebSocket('wss://agile-chamber-50593.herokuapp.com/payments')
 
     socket.on('connect', (data) => {
-      console.log('websocket connected', data)
+      console.log('websocket connected')
 
       socket.send(JSON.stringify({
         type: 'register',
@@ -26,7 +26,8 @@ export default class Listener extends EventEmitter {
         this.emit('new_payment', payload)
 
       } catch(err) {
-        console.warn(err)
+        // skip registered message for now
+        // console.warn(err)
       }
     })
     

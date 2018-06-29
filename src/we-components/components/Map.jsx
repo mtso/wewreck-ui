@@ -10,6 +10,9 @@ import {
 } from "react-simple-maps"
 import { scaleLinear } from "d3-scale"
 // import request from "superagent"
+import Listener from '../data/listener'
+
+import Bubble from './Bubble'
 
 const wrapperStyles = {
   width: "100%",
@@ -54,16 +57,43 @@ const cities = [
   { "name": "Lima", "coordinates": [-77.0428,-12.0464], "population": 10750000 }
 ]
 
+const mapPayloadToCity = (payload) => ({
+  name: 'some name',
+  coordinates: [
+    +payload.geo.lng,
+    +payload.geo.lat,
+  ],
+  population: payload.payment.amount * 10000,
+})
+
 class BasicMap extends Component {
   constructor() {
     super()
     this.state = {
-      cities: [],
+      cities: cities,
     }
   }
+
   componentDidMount() {
+    const listener = this.listener = new Listener(this.props.account_id)
+
+    listener.on('new_payment', (payload) => {
+      const mapped = mapPayloadToCity(payload)
+      console.log(mapped)
+
+      this.setState({
+        cities: this.state.cities.concat([ mapped ])
+      })
+    })
   }
+
+  componentWillUnmount() {
+    this.listener && this.listener.close()
+  }
+
   render() {
+    const { cities } = this.state
+    
     return (
       <div style={wrapperStyles}>
         <ComposableMap
@@ -110,16 +140,12 @@ class BasicMap extends Component {
             <Markers>
               {
                 cities.map((city, i) => (
-                  <Marker key={i} marker={city}>
-                    <circle
-                      cx={0}
-                      cy={0}
-                      r={cityScale(city.population)}
-                      fill="rgba(255,87,34,0.8)"
-                      stroke="#607D8B"
-                      strokeWidth="2"
-                    />
-                  </Marker>
+                  <Bubble
+                    key={city.name}
+                    r={cityScale(city.population)}
+                    coordinates={city.coordinates}
+                    city={city}
+                  />
                 ))
               }
             </Markers>
