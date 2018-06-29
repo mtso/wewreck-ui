@@ -63,6 +63,7 @@ class BasicMap extends Component {
 
   render() {
     const { cities } = this.state
+    const { fullscreen } = this.props
 
     return (
       <div style={wrapperStyles}>
